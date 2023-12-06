@@ -13,7 +13,7 @@ const App = () => {
   const myPigLatinCodeHere = () => {
     // NO MODIFICATION NEEDED: the variable "arrayOfUserInput" will contain the text input from the user split into an array of words
     const arrayOfUserInput = userInput.split(" ")
-    console.log("arrayOfUserInput:", arrayOfUserInput)
+    // console.log("arrayOfUserInput:", arrayOfUserInput)
 
     // NO MODIFICATION NEEDED: now that we have an array of words, we can map over the array and look at each word
     const translatedWordsArray = arrayOfUserInput.map((eachWord) => {
@@ -30,11 +30,20 @@ const App = () => {
         )
       })
       console.log("vowelsArray:", vowelsArray)
+      // creating a variable to hold the first vowel in the word, index 0 from the vowels array
       const firstVowel = vowelsArray[0]
+      // creating a variable to hold the letter of the word before the first vowel
+      const qChecker = eachWord[eachWord.indexOf(firstVowel) - 1]
+      // conditional statement that handles all the pig latin-izing
       if (eachWord.indexOf(firstVowel) === 0) {
         return `${eachWord}way`
+      } else if (qChecker === "q") {
+        const nextVowel = vowelsArray[1]
+        const indexOfNextVowel = eachWord.indexOf(nextVowel)
+        const firstPartOfWord = eachWord.slice(0, indexOfNextVowel)
+        const secondPartOfWord = eachWord.slice(indexOfNextVowel)
+        return `${secondPartOfWord}${firstPartOfWord}ay`
       }
-      // ACTION ITEM: your Pig Latin logic goes here!
 
       // ACTION ITEM: this return will be the output of your Pig Latin'd code
       return eachWord
