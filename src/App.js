@@ -35,17 +35,30 @@ const App = () => {
       // creating a variable to hold the letter of the word before the first vowel
       const qChecker = eachWord[eachWord.indexOf(firstVowel) - 1]
       // conditional statement that handles all the pig latin-izing
+      // checks if the first letter in the vowels array is at the first index of the word
       if (eachWord.indexOf(firstVowel) === 0) {
         return `${eachWord}way`
       } else if (qChecker === "q") {
-        const nextVowel = vowelsArray[1]
-        const indexOfNextVowel = eachWord.indexOf(nextVowel)
+        // creating a variable to hold the index of the second vowel in the word
+        const indexOfNextVowel = eachWord.indexOf(vowelsArray[1])
+        // creating a variable to hold the first part of the word not including the first vowel
         const firstPartOfWord = eachWord.slice(0, indexOfNextVowel)
+        // creating a variable to hold the second part of the word from the vowel to the full length
         const secondPartOfWord = eachWord.slice(indexOfNextVowel)
+        // returning the string interpolation of the two parts of the word + 'ay'
+        return `${secondPartOfWord}${firstPartOfWord}ay`
+        // handing the "sometimes y" part of pig latin, there are no vowels in the word so the vowel array is empty
+      } else if (vowelsArray.length === 0) {
+        // creating a variable to hold the location of "y"
+        const findTheY = eachWord.indexOf("y")
+        // creating a variable to hold the first part of the word from the first letter to the y
+        const firstPartOfWord = eachWord.slice(0, findTheY)
+        // creating a variable to hold the second part of the word from the y to the end of the string
+        const secondPartOfWord = eachWord.slice(findTheY)
+        // returning the string interpolation of the two parts of the word + 'ay'
         return `${secondPartOfWord}${firstPartOfWord}ay`
       }
 
-      // ACTION ITEM: this return will be the output of your Pig Latin'd code
       return eachWord
     })
 
