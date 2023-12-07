@@ -32,34 +32,40 @@ const App = () => {
       console.log("vowelsArray:", vowelsArray)
       // creating a variable to hold the first vowel in the word, index 0 from the vowels array
       const firstVowel = vowelsArray[0]
-      // creating a variable to hold the letter of the word before the first vowel
-      const qChecker = eachWord[eachWord.indexOf(firstVowel) - 1]
+      // creating a variable to hold the index of the first vowel in the word
+      const indexOfFirstVowel = eachWord.indexOf(firstVowel)
+      // creating a variable to hold the letter of the word before the first vowel to check for q
+      const qChecker = eachWord[indexOfFirstVowel - 1]
       // conditional statement that handles all the pig latin-izing
       // checks if the first letter in the vowels array is at the first index of the word
-      if (eachWord.indexOf(firstVowel) === 0) {
+      if (indexOfFirstVowel === 0) {
         return `${eachWord}way`
       } else if (qChecker === "q") {
         // creating a variable to hold the index of the second vowel in the word
         const indexOfNextVowel = eachWord.indexOf(vowelsArray[1])
         // creating a variable to hold the first part of the word not including the first vowel
-        const firstPartOfWord = eachWord.slice(0, indexOfNextVowel)
+        const firstPartOfWordWithQ = eachWord.slice(0, indexOfNextVowel)
         // creating a variable to hold the second part of the word from the vowel to the full length
-        const secondPartOfWord = eachWord.slice(indexOfNextVowel)
+        const secondPartOfWordWithQ = eachWord.slice(indexOfNextVowel)
         // returning the string interpolation of the two parts of the word + 'ay'
-        return `${secondPartOfWord}${firstPartOfWord}ay`
+        return `${secondPartOfWordWithQ}${firstPartOfWordWithQ}ay`
         // handing the "sometimes y" part of pig latin, there are no vowels in the word so the vowel array is empty
       } else if (vowelsArray.length === 0) {
         // creating a variable to hold the location of "y"
         const findTheY = eachWord.indexOf("y")
         // creating a variable to hold the first part of the word from the first letter to the y
-        const firstPartOfWord = eachWord.slice(0, findTheY)
+        const firstPartOfWordWithY = eachWord.slice(0, findTheY)
         // creating a variable to hold the second part of the word from the y to the end of the string
-        const secondPartOfWord = eachWord.slice(findTheY)
+        const secondPartOfWordWithY = eachWord.slice(findTheY)
         // returning the string interpolation of the two parts of the word + 'ay'
+        return `${secondPartOfWordWithY}${firstPartOfWordWithY}ay`
+      } else {
+        // creating a variable to hold the first part of the word from the first letter to the first vowel
+        const firstPartOfWord = eachWord.slice(0, indexOfFirstVowel)
+        // creating a variable to hold the second part of the word from the vowel to the end
+        const secondPartOfWord = eachWord.slice(indexOfFirstVowel)
         return `${secondPartOfWord}${firstPartOfWord}ay`
       }
-
-      return eachWord
     })
 
     // NO MODIFICATION NEEDED: once the code has been modified it gets joined from an array back to a string
